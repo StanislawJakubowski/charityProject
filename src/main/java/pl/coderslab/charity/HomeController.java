@@ -28,19 +28,23 @@ public class HomeController {
 
     @GetMapping("/")
     public String homeAction(@AuthenticationPrincipal CurrentUserId currentUserId, Model model) {
+        homeActionMethod(currentUserId, model);
+        return "index";
+    }
+
+    private void homeActionMethod(@AuthenticationPrincipal CurrentUserId currentUserId, Model model) {
         if (currentUserId != null) {
             model.addAttribute("user", userServiceImpl.findById(currentUserId.getUserId()));
         }
         model.addAttribute("institutions", institutionService.finaAll());
         Long sumOfQuantities = donationService.sumOfQuantities();
         Long sumOfDonations = donationService.sumOfDonations();
-        if (sumOfQuantities == null) {
-            sumOfQuantities = 0l;
-            sumOfDonations = 0l;
-        }
+//        if (sumOfQuantities == null) {
+//            sumOfQuantities = 0l;
+//            sumOfDonations = 0l;
+//        }
         model.addAttribute("sumOfQuantities", sumOfQuantities);
         model.addAttribute("sumOfDonations", sumOfDonations);
-        return "index";
     }
 
 

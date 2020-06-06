@@ -25,6 +25,7 @@ public class LoginController {
         this.userService = userService;
     }
 
+    // TODO do I need to put model in login
     @GetMapping("/login")
     public String loginAction(Model model) {
         return "login";
@@ -55,7 +56,7 @@ public class LoginController {
         User existingUser = userService.findByEmail(user.getEmail());
         if (existingUser != null) {
             result.addError(new FieldError("user", "email",
-                    "Email już istenje"));
+                    "Email już istnieje"));
             return "register";
         } else if (!password2.equals(user.getPassword())) {
             result.addError(new FieldError("user", "password",

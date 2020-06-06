@@ -35,11 +35,18 @@ public class DonationService {
         return donationRepository.findAll();
     }
 
+    //todo change if sum = null than return 0l;
     public Long sumOfQuantities() {
-        return donationRepository.sumOfQuantities();
+        if (donationRepository.sumOfQuantities() == null)
+            return 0L;
+        else
+            return donationRepository.sumOfQuantities();
     }
 
     public Long sumOfDonations() {
-        return donationRepository.sumOfDonations();
+        if(donationRepository.sumOfDonations() == null)
+            return 0L;
+        else
+            return donationRepository.sumOfDonations();
     }
 }

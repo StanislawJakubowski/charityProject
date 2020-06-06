@@ -38,6 +38,7 @@ public class DonationController {
         return "form";
     }
 
+    //TODO VALIDATION doesnt work
     @PostMapping("/form")
     public String formAction(@AuthenticationPrincipal CurrentUserId currentUserId, Donation donation, BindingResult result) {
         if (result.hasErrors()) {

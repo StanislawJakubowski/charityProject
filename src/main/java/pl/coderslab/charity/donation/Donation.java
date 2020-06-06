@@ -12,6 +12,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+//Todo correct validation options
 @Entity
 @Table(name = "donations")
 public class Donation {
@@ -23,7 +24,7 @@ public class Donation {
     @NotNull
     private Long quantity;
 
-    //check if should be eager, maybe change to lazy and use get if necessary
+    //TODO check if should be eager, maybe change to lazy and use get if necessary
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Category> categories = new ArrayList<>();
 
@@ -36,11 +37,11 @@ public class Donation {
     @NotBlank
     private String city;
 
-    //TODO use custom alidation
+    //TODO use custom validation
     @Column(name = "zip_code")
     private String zipCode;
 
-    //TODO use custom alidation
+    //TODO use custom validation
     @Column(name = "phone_number")
     private long phoneNumber;
 
