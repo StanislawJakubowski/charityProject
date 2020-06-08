@@ -5,6 +5,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.charity.category.Category;
 import pl.coderslab.charity.institution.Institution;
 import pl.coderslab.charity.user.User;
+import pl.coderslab.charity.validate.Phone;
+import pl.coderslab.charity.validate.ZipCode;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
@@ -12,7 +15,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-//Todo correct validation options
 @Entity
 @Table(name = "donations")
 public class Donation {
@@ -37,13 +39,13 @@ public class Donation {
     @NotBlank
     private String city;
 
-    //TODO use custom validation
+    @ZipCode
     @Column(name = "zip_code")
     private String zipCode;
 
-    //TODO use custom validation
+    @Phone
     @Column(name = "phone_number")
-    private long phoneNumber;
+    private String phoneNumber;
 
     //TODO check if dates are correct
     @Column(name = "pick_up_date")
@@ -63,7 +65,7 @@ public class Donation {
     public Donation() {
     }
 
-    public Donation(Long quantity, List<Category> categories, Institution institution, String street, String city, String zipCode, long phoneNumber, LocalDate pickUpDate, LocalTime pickUpTime, String pickUpComment, User user) {
+    public Donation(Long quantity, List<Category> categories, Institution institution, String street, String city, String zipCode, String phoneNumber, LocalDate pickUpDate, LocalTime pickUpTime, String pickUpComment, User user) {
         this.quantity = quantity;
         this.categories = categories;
         this.institution = institution;
@@ -141,11 +143,11 @@ public class Donation {
         this.zipCode = zipCode;
     }
 
-    public long getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(long phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
