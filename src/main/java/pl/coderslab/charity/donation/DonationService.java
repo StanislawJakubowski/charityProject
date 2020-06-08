@@ -36,10 +36,16 @@ public class DonationService {
     }
 
     public Long sumOfQuantities() {
-        return donationRepository.sumOfQuantities();
+        if (donationRepository.sumOfQuantities() == null)
+            return 0L;
+        else
+            return donationRepository.sumOfQuantities();
     }
 
     public Long sumOfDonations() {
-        return donationRepository.sumOfDonations();
+        if(donationRepository.sumOfDonations() == null)
+            return 0L;
+        else
+            return donationRepository.sumOfDonations();
     }
 }

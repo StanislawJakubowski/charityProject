@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.User;
 import java.util.Collection;
 
 public class CurrentUserId extends User {
+
     private final long userId;
 
     /**

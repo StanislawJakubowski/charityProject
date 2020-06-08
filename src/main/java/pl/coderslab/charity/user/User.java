@@ -1,17 +1,16 @@
 package pl.coderslab.charity.user;
 
 import pl.coderslab.charity.donation.Donation;
+import pl.coderslab.charity.validate.Email;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-//TODO change to "users"
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -24,10 +23,8 @@ public class User {
     @NotBlank(message = "Proszę wprowadzić nazwisko")
     private String lastName;
 
-    //TODO use better validatro to type email
-    @Email(message = "Proszę wprowadzić poprawny email")
+    @Email
     @Column(nullable = false, unique = true)
-    @NotBlank(message = "Proszę wprowadzić email")
     private String email;
 
     @NotBlank(message = "Proszę wprowadzić hasło")

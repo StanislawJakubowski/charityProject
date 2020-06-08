@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.HashSet;
 
-//TODO change name to UserService, delete implementation of UserService
+
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -20,13 +20,11 @@ public class UserServiceImpl implements UserService {
         this.roleRepository = roleRepository;
     }
 
-    //TODO delete override
     @Override
     public User findByUserName(String email) {
         return userRepository.findByEmail(email);
     }
 
-    //TODO delete override , cr
     @Override
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
