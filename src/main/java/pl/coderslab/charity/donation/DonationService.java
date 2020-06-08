@@ -35,7 +35,6 @@ public class DonationService {
         return donationRepository.findAll();
     }
 
-    //todo change if sum = null than return 0l;
     public Long sumOfQuantities() {
         if (donationRepository.sumOfQuantities() == null)
             return 0L;

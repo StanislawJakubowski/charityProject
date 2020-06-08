@@ -10,7 +10,6 @@ import pl.coderslab.charity.institution.InstitutionService;
 import pl.coderslab.charity.user.CurrentUserId;
 import pl.coderslab.charity.user.UserServiceImpl;
 
-//TODO AdminController vs HomeController  - check why they are duplicated
 @Controller
 public class HomeController {
 

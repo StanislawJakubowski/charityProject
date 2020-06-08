@@ -10,8 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-//TODO change to "users"
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id

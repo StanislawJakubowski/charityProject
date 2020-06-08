@@ -25,9 +25,9 @@ public class LoginController {
         this.userService = userService;
     }
 
-    // TODO do I need to put model in login
+    // deleted login model
     @GetMapping("/login")
-    public String loginAction(Model model) {
+    public String loginAction() {
         return "login";
     }
 
