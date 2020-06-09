@@ -1,5 +1,6 @@
 package pl.coderslab.charity;
 
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -9,6 +10,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.coderslab.charity.registration.ConfirmationToken;
+import pl.coderslab.charity.registration.ConfirmationTokenService;
+import pl.coderslab.charity.registration.MailService;
 import pl.coderslab.charity.user.User;
 import pl.coderslab.charity.user.UserServiceImpl;
 
@@ -20,15 +24,19 @@ import javax.validation.Valid;
 public class LoginController {
 
     private final UserServiceImpl userService;
+    private final ConfirmationTokenService confirmationTokenService;
+    private final MailService mailService;
 
-    public LoginController(UserServiceImpl userService) {
+    public LoginController(UserServiceImpl userService, ConfirmationTokenService confirmationTokenService, MailService mailService) {
         this.userService = userService;
+        this.confirmationTokenService = confirmationTokenService;
+        this.mailService = mailService;
     }
 
     // deleted login model
     @GetMapping("/login")
     public String loginAction() {
-        return "login";
+        return "loginAndRegistry/login";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
@@ -43,7 +51,7 @@ public class LoginController {
     @GetMapping("/register")
     public String registerAction(Model model) {
         model.addAttribute("user", new User());
-        return "register";
+        return "loginAndRegistry/register";
     }
 
     //TODO set sending email to confirm registration
@@ -53,23 +61,33 @@ public class LoginController {
         if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.messageForm", result);
             redirectAttributes.addFlashAttribute("user", user);
-            return "register";
+            return "loginAndRegistry/register";
         }
         User existingUser = userService.findByEmail(user.getEmail());
         if (existingUser != null) {
             result.addError(new FieldError("user", "email",
                     "Email już istnieje"));
-            return "register";
+            return "loginAndRegistry/register";
+
         } else if (!password2.equals(user.getPassword())) {
             result.addError(new FieldError("user", "password",
                     "Hasła nie są takie same"));
-            return "register";
+            return "loginAndRegistry/register";
         }
-
 
         user.setPassword(user.getPassword());
         userService.saveUser(user);
-        return "redirect:login";
+        ConfirmationToken confirmationToken = new ConfirmationToken(user);
+        confirmationTokenService.save(confirmationToken);
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(user.getEmail());
+        mailMessage.setSubject("Complete Registration!");
+        mailMessage.setFrom("charityApp@gmail.com");
+        mailMessage.setText("To confirm your account, please click here : " +
+                "http://localhost:8080/confirm-account?token="+confirmationToken.getConfirmationToken());
+        mailService.sendEmail(mailMessage);
+
+        return "loginAndRegistry/login";
     }
 
 }

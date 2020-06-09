@@ -1,5 +1,6 @@
 package pl.coderslab.charity.registration;
 
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -14,7 +15,12 @@ public class MailController {
 
     @GetMapping("/sendemail")
     public String sendEmail() {
-        mailService.sendSimpleEmail("stanislaw.jakubowski@o2.pl", "Test e-mail by ME", "Testing email functionality");
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo("stanislaw.jakubowski@o2.pl");
+        mailMessage.setSubject("Complete Registration!");
+        mailMessage.setFrom("charityApp@gmail.com");
+        mailMessage.setText("To confirm your account, please be good");
+        mailService.sendEmail(mailMessage);
 
         return "index";
     }
