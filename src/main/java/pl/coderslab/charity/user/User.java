@@ -17,17 +17,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Proszę wprowadzić imię")
+    @NotBlank
     private String firstName;
 
-    @NotBlank(message = "Proszę wprowadzić nazwisko")
+    @NotBlank
     private String lastName;
 
     @Email
     @Column(nullable = false, unique = true)
     private String email;
 
-    @NotBlank(message = "Proszę wprowadzić hasło")
+    @NotBlank
     private String password;
 
     private int enabled;

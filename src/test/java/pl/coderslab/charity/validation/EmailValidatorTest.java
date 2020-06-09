@@ -2,7 +2,6 @@ package pl.coderslab.charity.validation;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.coderslab.charity.user.User;
 import javax.validation.ConstraintViolation;
@@ -10,11 +9,9 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
 public class EmailValidatorTest  {
 
     User testUser = new User();

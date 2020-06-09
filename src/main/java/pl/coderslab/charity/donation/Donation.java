@@ -26,7 +26,6 @@ public class Donation {
     @NotNull
     private Long quantity;
 
-    //TODO check if should be eager, maybe change to lazy and use get if necessary
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Category> categories = new ArrayList<>();
 

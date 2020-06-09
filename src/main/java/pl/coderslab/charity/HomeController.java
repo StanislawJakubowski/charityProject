@@ -38,10 +38,6 @@ public class HomeController {
         model.addAttribute("institutions", institutionService.finaAll());
         Long sumOfQuantities = donationService.sumOfQuantities();
         Long sumOfDonations = donationService.sumOfDonations();
-//        if (sumOfQuantities == null) {
-//            sumOfQuantities = 0l;
-//            sumOfDonations = 0l;
-//        }
         model.addAttribute("sumOfQuantities", sumOfQuantities);
         model.addAttribute("sumOfDonations", sumOfDonations);
     }

@@ -11,6 +11,6 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ZipCode {
-    String message() default "{Niepoprawny kod pocztowy}";
+    String message() default "Niepoprawny kod pocztowy";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {}; }

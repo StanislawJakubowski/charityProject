@@ -46,8 +46,10 @@ public class LoginController {
         return "register";
     }
 
+    //TODO set sending email to confirm registration
     @PostMapping("/register")
-    public String registerAction(@Valid @ModelAttribute("user") User user, BindingResult result, @RequestParam String password2, RedirectAttributes redirectAttributes) {
+    public String registerAction(@Valid @ModelAttribute("user") User user, BindingResult result,
+                                 @RequestParam String password2, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.messageForm", result);
             redirectAttributes.addFlashAttribute("user", user);
@@ -63,6 +65,8 @@ public class LoginController {
                     "Hasła nie są takie same"));
             return "register";
         }
+
+
         user.setPassword(user.getPassword());
         userService.saveUser(user);
         return "redirect:login";

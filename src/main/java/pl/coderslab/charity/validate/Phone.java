@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Phone {
-    String message() default "{Niepoprawny numer telefonu}";
+    String message() default "Niepoprawny numer telefonu";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
