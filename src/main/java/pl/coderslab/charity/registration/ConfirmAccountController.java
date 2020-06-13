@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.coderslab.charity.registration.token.ConfirmationToken;
+import pl.coderslab.charity.registration.token.ConfirmationTokenService;
 import pl.coderslab.charity.user.User;
 import pl.coderslab.charity.user.UserServiceImpl;
 

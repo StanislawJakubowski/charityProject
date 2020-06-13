@@ -1,6 +1,5 @@
 package pl.coderslab.charity;
 
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -10,8 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.coderslab.charity.registration.ConfirmationToken;
-import pl.coderslab.charity.registration.ConfirmationTokenService;
+import pl.coderslab.charity.registration.token.ConfirmationToken;
+import pl.coderslab.charity.registration.token.ConfirmationTokenService;
 import pl.coderslab.charity.registration.MailService;
 import pl.coderslab.charity.user.User;
 import pl.coderslab.charity.user.UserServiceImpl;
@@ -33,7 +32,6 @@ public class LoginController {
         this.mailService = mailService;
     }
 
-    // deleted login model
     @GetMapping("/login")
     public String loginAction() {
         return "loginAndRegistry/login";
@@ -54,7 +52,6 @@ public class LoginController {
         return "loginAndRegistry/register";
     }
 
-    //TODO set sending email to confirm registration
     @PostMapping("/register")
     public String registerAction(@Valid @ModelAttribute("user") User user, BindingResult result,
                                  @RequestParam String password2, RedirectAttributes redirectAttributes) {
@@ -77,15 +74,10 @@ public class LoginController {
 
         user.setPassword(user.getPassword());
         userService.saveUser(user);
+
         ConfirmationToken confirmationToken = new ConfirmationToken(user);
         confirmationTokenService.save(confirmationToken);
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(user.getEmail());
-        mailMessage.setSubject("Complete Registration!");
-        mailMessage.setFrom("charityApp@gmail.com");
-        mailMessage.setText("To confirm your account, please click here : " +
-                "http://localhost:8080/confirm-account?token="+confirmationToken.getConfirmationToken());
-        mailService.sendEmail(mailMessage);
+        mailService.sendRegistrationEmail(user.getEmail(), confirmationToken);
 
         return "loginAndRegistry/login";
     }

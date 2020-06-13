@@ -9,6 +9,7 @@ public class CurrentUserId extends User {
 
     private final long userId;
 
+
     /**
      * @param username
      * @param password
@@ -17,7 +18,7 @@ public class CurrentUserId extends User {
      */
     public CurrentUserId(String username, String password,
                          Collection<? extends GrantedAuthority> authorities,
-                         long userId) {
+                         long userId)  {
         super(username, password, authorities);
         this.userId = userId;
     }
@@ -25,5 +26,6 @@ public class CurrentUserId extends User {
     public long getUserId() {
         return userId;
     }
+
 
 }

@@ -1,4 +1,4 @@
-package pl.coderslab.charity.registration;
+package pl.coderslab.charity.registration.token;
 
 import org.springframework.stereotype.Service;
 

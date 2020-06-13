@@ -5,11 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import pl.coderslab.charity.HomeController;
-import pl.coderslab.charity.category.CategoryService;
-import pl.coderslab.charity.donation.DonationService;
-import pl.coderslab.charity.institution.InstitutionService;
 import pl.coderslab.charity.user.CurrentUserId;
-import pl.coderslab.charity.user.UserServiceImpl;
 
 @Controller
 public class AdminController {
