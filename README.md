@@ -1,4 +1,4 @@
-# charityProject
+# CharityProject
 
 Java Project for web aplication for donation management system.
 Application allow user to sign up. After registration it send on email "confirm account token". 
