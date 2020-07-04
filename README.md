@@ -1,6 +1,6 @@
 # CharityProject
 
-  Java Project for web aplication for donation management system.
+  Java Project of web aplication for donation management system.
 Application allow user to sign up. After registration it send on email "confirm account token". 
 User has to confirm it in email box to get authorization and set role for user. He/she can fill "donation form" to a specific organization. 
 Admin has posibility to modify organizations and specific fields of form. 
